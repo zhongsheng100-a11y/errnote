@@ -1,0 +1,35 @@
+[project]
+name = "errnote"
+version = "0.1.0"
+description = "Agent 错题本 — the error notebook for AI agent tool calls. Remember failures so your agent doesn't repeat them."
+authors = [{ name = "钟声" }]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = []
+
+[project.optional-dependencies]
+embed = ["fastembed>=0.3"]
+mcp = ["mcp>=1.0"]
+dev = ["pytest>=8", "pytest-cov"]
+
+[project.scripts]
+agent-memory = "agent_memory.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agent_memory"]
