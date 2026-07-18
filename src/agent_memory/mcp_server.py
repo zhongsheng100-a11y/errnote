@@ -211,11 +211,13 @@ def stats() -> str:
 def main():
     parser = argparse.ArgumentParser(description="Agent Memory MCP Server")
     parser.add_argument("--db", default="./agent_memory.db", help="SQLite database path")
+    parser.add_argument("--transport", default="stdio", choices=["stdio", "sse"], help="Transport protocol")
+    parser.add_argument("--port", type=int, default=8080, help="Port for SSE transport")
     args = parser.parse_args()
 
     os.environ["AGENT_MEMORY_DB"] = args.db
-    print(f"🧠 Agent Memory MCP Server starting (db: {args.db})", file=sys.stderr)
-    mcp.run()
+    print(f"🧠 Agent Memory MCP Server starting (db: {args.db}, transport: {args.transport})", file=sys.stderr)
+    mcp.run(transport=args.transport)
 
 
 if __name__ == "__main__":
